@@ -21,6 +21,17 @@ public class MainActivity extends AppCompatActivity {
     private Button signUpBtn;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        ParseUser currUser = ParseUser.getCurrentUser();
+        if (currUser != null) {
+            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
