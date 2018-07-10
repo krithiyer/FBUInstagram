@@ -33,7 +33,7 @@ public class PostActivity extends AppCompatActivity {
     File photoFile;
     private Button createButton;
 
-    private static final String imagePath = "/storage/self/primary/DCIM/Camera/IMG_20180709_154621.jpg";
+    private String imagePath;
     private EditText descriptionInput;
     private Button refreshButton;
     private Button logOutButton;
@@ -53,7 +53,7 @@ public class PostActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final String description = descriptionInput.getText().toString();
                 final ParseUser user = ParseUser.getCurrentUser();
-                final File file = new File(imagePath);
+                final File file = new File(photoFile.getAbsolutePath());
                 final ParseFile parseFile = new ParseFile(file);
                 parseFile.saveInBackground(new SaveCallback() {
                     @Override
