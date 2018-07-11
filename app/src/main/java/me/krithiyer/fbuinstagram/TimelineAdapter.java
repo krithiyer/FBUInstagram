@@ -25,10 +25,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     }
 
 
-    public void setTimelinePosts(ArrayList<Post> posts) {
-        timelinePosts = posts;
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
         // get context
@@ -47,6 +43,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         // populate data
         holder.tvTLCaption.setText(post.getDescription());
         holder.tvTLUsername.setText(post.getUser().getUsername());
+        //holder.tvCreatedAt.setText(post.getCreatedAt().toString());
 
         String imgURL = post.getImage().getUrl();
         Glide.with(context)
@@ -65,6 +62,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         ImageView ivPicture;
         TextView tvTLUsername;
         TextView tvTLCaption;
+       // TextView tvCreatedAt;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -72,6 +70,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
             tvTLUsername = (TextView) itemView.findViewById(R.id.tvTLUsername);
             tvTLCaption = (TextView) itemView.findViewById(R.id.tvTLCaption);
+            //tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
 
         }
     }

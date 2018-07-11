@@ -33,11 +33,8 @@ public class PostActivity extends AppCompatActivity {
     File photoFile;
     private Button createButton;
 
-    private String imagePath;
     private EditText descriptionInput;
-    private Button refreshButton;
-    private Button logOutButton;
-    private Button cameraButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

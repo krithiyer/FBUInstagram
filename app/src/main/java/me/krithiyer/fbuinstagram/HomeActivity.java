@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
+
         // establishing bottom navigation
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         // setting navigation tasks
@@ -72,6 +74,11 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     case R.id.home_buttom:
                         loadTopPosts();
+                        return true;
+                    case R.id.profile_button:
+                        Intent u = new Intent(HomeActivity.this, ProfileActivity.class);
+                        startActivity(u);
+                        finish();
 
 
 
@@ -80,28 +87,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-        // logging out
-        //logOutButton.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View view) {
-              //  ParseUser.logOut();
-               // ParseUser currentUser = ParseUser.getCurrentUser();
-               // if (currentUser == null) {
-                 //   Log.d("HomeActivity", "Logout successful!");
-                   // final Intent i = new Intent(HomeActivity.this, MainActivity.class);
-                   // startActivity(i);
-                   // finish();
-
-               // }
-           // }
-       // });
-
     }
 
 
     private void loadTopPosts() {
-        tlPosts.clear();
+        clear();
         final Post.Query postQuery = new Post.Query();
         postQuery.getTop().withUser();
 

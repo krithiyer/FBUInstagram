@@ -30,9 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
-        android:background="#458eff"
-        android:layout_marginTop="225dp"
+        android:layout_marginBottom="98dp"
+        android:background="#6dc993"
         android:text="SIGN-UP"
         android:textColor="#ffffff" />
 
