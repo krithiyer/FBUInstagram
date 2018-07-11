@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         ParseUser currUser = ParseUser.getCurrentUser();
         if (currUser != null) {
             Intent i = new Intent(MainActivity.this, HomeActivity.class);
+            i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
             startActivity(i);
-            finish();
         }
     }
 
@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 if (e == null) {
                     Log.d("MainActivity", "Created user successfully!");
                     final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                     startActivity(intent);
-                    finish();
                 } else {
                     e.printStackTrace();
                 }
