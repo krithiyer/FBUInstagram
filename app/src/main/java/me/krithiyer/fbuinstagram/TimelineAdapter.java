@@ -1,7 +1,6 @@
 package me.krithiyer.fbuinstagram;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +17,13 @@ import me.krithiyer.fbuinstagram.model.Post;
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
     // list of movies
     ArrayList<Post> timelinePosts;
-    // config needed for image URL
-    Bitmap.Config config;
     // context for rendering
     Context context;
 
-    public Bitmap.Config getConfig() {
-        return config;
+    public TimelineAdapter(ArrayList<Post> post) {
+        this.timelinePosts = post;
     }
 
-    public void setConfig(Bitmap.Config config) {
-        this.config = config;
-    }
 
     public void setTimelinePosts(ArrayList<Post> posts) {
         timelinePosts = posts;

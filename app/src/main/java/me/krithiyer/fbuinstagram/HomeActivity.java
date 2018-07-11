@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +14,6 @@ import android.widget.EditText;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,26 +33,27 @@ public class HomeActivity extends AppCompatActivity {
     TimelineAdapter adapter;
     ArrayList<Post> tlPosts;
 
-
-
-    public final String APP_TAG = "MyCustomApp";
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
-    File photoFile;
-
+    // Query variables
+    Post.Query newQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        // initialize arraylist of posts
+        tlPosts = new ArrayList<>();
+        // initialize adapter
+        adapter = new TimelineAdapter(tlPosts);
+
+        // resolve recyclerview
+        rvPosts = findViewById(R.id.rvPosts);
+        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        rvPosts.setAdapter(adapter);
+
+        loadTopPosts();
+
+        // establishing bottom navigation
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-
-        //descriptionInput = findViewById(R.id.tvDescription);
-        //createButton = findViewById(R.id.btCreate);
-        //refreshButton = findViewById(R.id.btRefresh);
-        //logOutButton = findViewById(R.id.btLogOut);
-        //cameraButton = findViewById(R.id.btCamera);
-
         // setting navigation tasks
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -63,6 +63,10 @@ public class HomeActivity extends AppCompatActivity {
                         Intent i = new Intent(HomeActivity.this, PostActivity.class);
                         startActivity(i);
                         return true;
+                    case R.id.home_buttom:
+                        loadTopPosts();
+
+
 
                 }
                 return false;
@@ -106,18 +110,22 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername()
-                        );
-                    }
+                    tlPosts.addAll(objects);
+                    adapter.notifyDataSetChanged();
+                    //for (int i = 0; i < objects.size(); i++) {
+
+                        //Log.d("HomeActivity", "Post[" + i + "] = "
+                          //      + objects.get(i).getDescription()
+                            //    + "\nusername = " + objects.get(i).getUser().getUsername()
+                       // );
+                 //   }
                 } else {
                     e.printStackTrace();
                 }
             }
         });
     }
+
 
 
 

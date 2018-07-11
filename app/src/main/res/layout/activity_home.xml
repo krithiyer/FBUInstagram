@@ -15,6 +15,7 @@
         app:menu="@menu/men_bottom_navigation" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvPosts"
         android:layout_width="match_parent"
         android:layout_height="508dp"
         android:layout_alignParentStart="true"
