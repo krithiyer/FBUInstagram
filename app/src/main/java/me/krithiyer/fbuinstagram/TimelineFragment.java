@@ -24,7 +24,7 @@ public class TimelineFragment extends Fragment{
     // initialize arraylist of posts
     ArrayList<Post> tlPosts;
     SwipeRefreshLayout swipeContainer;
- //   TextView tvUser;
+   // TextView tvCaption;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -36,15 +36,8 @@ public class TimelineFragment extends Fragment{
         rvPosts = currView.findViewById(R.id.rvPosts);
         rvPosts.setLayoutManager(new LinearLayoutManager(currView.getContext()));
         rvPosts.setAdapter(adapter);
-//        tvUser = currView.findViewById(R.id.tvTLUsername);
-//
-//        tvUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//
+       // tvCaption = currView.findViewById(R.id.tvTLCaption);
+
         // loading posts
         loadTopPosts();
 

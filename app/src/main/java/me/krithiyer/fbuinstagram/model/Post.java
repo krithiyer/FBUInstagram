@@ -37,6 +37,10 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
+    public String getMedia () {
+        return getParseFile(KEY_IMAGE).getUrl();
+    }
+
 
     public static class Query extends ParseQuery<Post>{
         public Query() {

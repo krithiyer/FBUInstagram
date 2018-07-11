@@ -8,13 +8,12 @@
 
     <ImageView
         android:id="@+id/ivCameraPhoto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:inputType="textMultiLine"
         android:adjustViewBounds="true"
-        android:layout_marginRight="5dp"
+        android:inputType="textMultiLine"
         android:scaleType="fitXY"
         app:srcCompat="@color/colorAccent" />
 
@@ -22,10 +21,11 @@
         android:id="@+id/tvCreateDescription"
         android:layout_width="284dp"
         android:layout_height="98dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/ivCameraPhoto"
-        android:hint="Write a caption..."
         android:background="@android:color/transparent"
+        android:hint="Write a caption..."
+        android:layout_marginRight="5dp"
         android:inputType="textMultiLine" />
 
     <Button
@@ -34,9 +34,33 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="125dp"
-        android:background="#8a3ab9"
-        android:text="CREATE POST"
+        android:layout_marginTop="208dp"
+        android:background="#458eff"
+        android:text="SHARE"
         android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/ibTagPeople"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="110dp"
+        android:backgroundTint="#ffffff"
+        android:text="Tag People"
+        android:textAllCaps="false"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/ibAddLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:backgroundTint="#ffffff"
+        android:text="Add Location"
+        android:textAllCaps="false"
+        android:textColor="#000000" />
 
 </RelativeLayout>

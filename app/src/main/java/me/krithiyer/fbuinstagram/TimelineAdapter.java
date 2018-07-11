@@ -78,6 +78,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             ibFavorite = (ImageButton) itemView.findViewById(R.id.ibFav);
             ibShare = (ImageButton) itemView.findViewById(R.id.ibSend);
             ibCommentPost = (ImageButton) itemView.findViewById(R.id.ibComment);
+
+
         }
     }
 }
