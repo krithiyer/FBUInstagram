@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,9 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView rvPosts;
     TimelineAdapter adapter;
     ArrayList<Post> tlPosts;
+    SwipeRefreshLayout swipeContainer;
+
+
 
 
     @Override
@@ -39,7 +43,21 @@ public class HomeActivity extends AppCompatActivity {
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
         rvPosts.setAdapter(adapter);
 
+        // loading timeline
         loadTopPosts();
+
+        // setting refresh on pull down
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadTopPosts();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         // establishing bottom navigation
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -83,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void loadTopPosts() {
+        tlPosts.clear();
         final Post.Query postQuery = new Post.Query();
         postQuery.getTop().withUser();
 
@@ -95,6 +114,7 @@ public class HomeActivity extends AppCompatActivity {
                         tlPosts.add(objects.get(i));
                     }
                     adapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
                 } else {
                     e.printStackTrace();
                 }
@@ -102,7 +122,9 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-
-
+    public void clear() {
+        tlPosts.clear();
+        adapter.notifyDataSetChanged();
+    }
 
 }

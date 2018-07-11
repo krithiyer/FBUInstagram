@@ -60,6 +60,9 @@ public class PostActivity extends AppCompatActivity {
                     public void done(ParseException e) {
                         if(e == null) {
                             createPost(description, parseFile, user);
+                            Intent i = new Intent(PostActivity.this, HomeActivity.class);
+                            startActivity(i);
+                            finish();
                         } else {
                             e.printStackTrace();
                         }
