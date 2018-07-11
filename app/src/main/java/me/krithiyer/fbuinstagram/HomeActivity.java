@@ -4,61 +4,63 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import me.krithiyer.fbuinstagram.model.Post;
 
 public class HomeActivity extends AppCompatActivity {
 
     // adapter variables
-    RecyclerView rvPosts;
-    TimelineAdapter adapter;
-    ArrayList<Post> tlPosts;
-    SwipeRefreshLayout swipeContainer;
-
-
-
+   // RecyclerView rvPosts;
+   // TimelineAdapter adapter;
+   // ArrayList<Post> tlPosts;
+   // SwipeRefreshLayout swipeContainer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // setting up Fragments
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        // define your fragments here
+        final Fragment fgProfile = new ProfileFragment();
+        final Fragment fgTimeline = new TimelineFragment();
+
+        // initially loading timeline
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.flFGLayout, fgTimeline).commit();
+
+
         setContentView(R.layout.activity_home);
-        // initialize arraylist of posts
-        tlPosts = new ArrayList<>();
-        // initialize adapter
-        adapter = new TimelineAdapter(tlPosts);
+//         initialize arraylist of posts
+//        tlPosts = new ArrayList<>();
+//         initialize adapter
+//        adapter = new TimelineAdapter(tlPosts);
+
 
         // resolve recyclerview
-        rvPosts = findViewById(R.id.rvPosts);
-        rvPosts.setLayoutManager(new LinearLayoutManager(this));
-        rvPosts.setAdapter(adapter);
-
-        // loading timeline
-        loadTopPosts();
-
+//        rvPosts = findViewById(R.id.rvPosts);
+//        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+//        rvPosts.setAdapter(adapter);
+//
+//         loading timeline
+//        loadTopPosts();
+//
         // setting refresh on pull down
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadTopPosts();
-            }
-        });
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+//        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                loadTopPosts();
+//            }
+//        });
+//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
 
 
         // establishing bottom navigation
@@ -73,12 +75,12 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(i);
                         return true;
                     case R.id.home_buttom:
-                        loadTopPosts();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.flFGLayout, fgTimeline).commit();
                         return true;
                     case R.id.profile_button:
-                        Intent u = new Intent(HomeActivity.this, ProfileActivity.class);
-                        startActivity(u);
-                        finish();
+                        FragmentTransaction fragmentProf = fragmentManager.beginTransaction();
+                        fragmentProf.replace(R.id.flFGLayout, fgProfile).commit();
 
 
 
@@ -90,31 +92,31 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    private void loadTopPosts() {
-        clear();
-        final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
-
-
-        postQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    for(int i = objects.size() - 1; i > -1; i--) {
-                        tlPosts.add(objects.get(i));
-                    }
-                    adapter.notifyDataSetChanged();
-                    swipeContainer.setRefreshing(false);
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
+//    private void loadTopPosts() {
+//        clear();
+//        final Post.Query postQuery = new Post.Query();
+//        postQuery.getTop().withUser();
+//
+//
+//        postQuery.findInBackground(new FindCallback<Post>() {
+//            @Override
+//            public void done(List<Post> objects, ParseException e) {
+//                if (e == null) {
+//                    for(int i = objects.size() - 1; i > -1; i--) {
+//                        tlPosts.add(objects.get(i));
+//                    }
+//                    adapter.notifyDataSetChanged();
+//                    swipeContainer.setRefreshing(false);
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
+//
+//    public void clear() {
+//        tlPosts.clear();
+//        adapter.notifyDataSetChanged();
     }
 
-    public void clear() {
-        tlPosts.clear();
-        adapter.notifyDataSetChanged();
-    }
-
-}
+//}

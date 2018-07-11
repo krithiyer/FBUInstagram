@@ -46,28 +46,28 @@ public class PostActivity extends AppCompatActivity {
 
         // creating a new post
         createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String description = descriptionInput.getText().toString();
-                final ParseUser user = ParseUser.getCurrentUser();
-                final File file = new File(photoFile.getAbsolutePath());
-                final ParseFile parseFile = new ParseFile(file);
-                parseFile.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if(e == null) {
-                            createPost(description, parseFile, user);
-                            Intent i = new Intent(PostActivity.this, HomeActivity.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            e.printStackTrace();
-                        }
+        @Override
+        public void onClick(View view) {
+            final String description = descriptionInput.getText().toString();
+            final ParseUser user = ParseUser.getCurrentUser();
+            final File file = new File(photoFile.getAbsolutePath());
+            final ParseFile parseFile = new ParseFile(file);
+            parseFile.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if(e == null) {
+                        createPost(description, parseFile, user);
+                        Intent i = new Intent(PostActivity.this, HomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        e.printStackTrace();
                     }
-                });
-            }
-        });
-    }
+                }
+            });
+        }
+    });
+}
 
     public void createPost(String description, ParseFile imageFile, ParseUser user) {
         final Post newPost = new Post();

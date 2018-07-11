@@ -36,8 +36,6 @@
         </provider>
 
         <activity android:name=".PostActivity" />
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

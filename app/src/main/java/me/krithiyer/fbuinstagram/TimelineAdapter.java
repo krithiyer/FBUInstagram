@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,6 +63,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         ImageView ivPicture;
         TextView tvTLUsername;
         TextView tvTLCaption;
+        ImageButton ibFavorite;
+        ImageButton ibShare;
+        ImageButton ibCommentPost;
        // TextView tvCreatedAt;
 
         public ViewHolder(View itemView) {
@@ -71,7 +75,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             tvTLUsername = (TextView) itemView.findViewById(R.id.tvTLUsername);
             tvTLCaption = (TextView) itemView.findViewById(R.id.tvTLCaption);
             //tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
-
+            ibFavorite = (ImageButton) itemView.findViewById(R.id.ibFav);
+            ibShare = (ImageButton) itemView.findViewById(R.id.ibSend);
+            ibCommentPost = (ImageButton) itemView.findViewById(R.id.ibComment);
         }
     }
 }
