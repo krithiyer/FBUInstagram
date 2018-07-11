@@ -44,7 +44,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         // populate data
         holder.tvTLCaption.setText(post.getUser().getUsername() + ": " + post.getDescription());
         holder.tvTLUsername.setText(post.getUser().getUsername());
-        //holder.tvCreatedAt.setText(post.getCreatedAt().toString());
+        holder.tvCreatedAt.setText(post.getCreatedAt().toString());
 
         String imgURL = post.getImage().getUrl();
         Glide.with(context)
@@ -66,7 +66,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         ImageButton ibFavorite;
         ImageButton ibShare;
         ImageButton ibCommentPost;
-       // TextView tvCreatedAt;
+        TextView tvCreatedAt;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -74,7 +74,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
             tvTLUsername = (TextView) itemView.findViewById(R.id.tvTLUsername);
             tvTLCaption = (TextView) itemView.findViewById(R.id.tvTLCaption);
-            //tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
+            tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreateA);
             ibFavorite = (ImageButton) itemView.findViewById(R.id.ibFav);
             ibShare = (ImageButton) itemView.findViewById(R.id.ibSend);
             ibCommentPost = (ImageButton) itemView.findViewById(R.id.ibComment);

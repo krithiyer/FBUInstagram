@@ -76,4 +76,15 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/direct" />
 
+    <TextView
+        android:id="@+id/tvCreateA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvTLUsername"
+        android:layout_below="@+id/tvTLCaption"
+        android:text="Created At"
+        android:textColor="#808080"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+
 </RelativeLayout>
