@@ -42,7 +42,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         // get post data at a specific index
         final Post post = timelinePosts.get(position);
         // populate data
-        holder.tvTLCaption.setText(post.getDescription());
+        holder.tvTLCaption.setText(post.getUser().getUsername() + ": " + post.getDescription());
         holder.tvTLUsername.setText(post.getUser().getUsername());
         //holder.tvCreatedAt.setText(post.getCreatedAt().toString());
 

@@ -21,31 +21,26 @@ public class TimelineFragment extends Fragment{
     // adapter variables
     RecyclerView rvPosts;
     TimelineAdapter adapter;
+    // initialize arraylist of posts
     ArrayList<Post> tlPosts;
     SwipeRefreshLayout swipeContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_timeline, parent, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        // initialize arraylist of posts
-        tlPosts = new ArrayList<>();
+        View currView = inflater.inflate(R.layout.fragment_timeline, parent, false);
         // initialize adapter
+        tlPosts = new ArrayList<>();
         adapter = new TimelineAdapter(tlPosts);
-
         // loading recyclerview
-        rvPosts = view.findViewById(R.id.rvPosts);
-        rvPosts.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        rvPosts = currView.findViewById(R.id.rvPosts);
+        rvPosts.setLayoutManager(new LinearLayoutManager(currView.getContext()));
         rvPosts.setAdapter(adapter);
 
         // loading posts
         loadTopPosts();
 
         // setting refresh on pull down
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer = (SwipeRefreshLayout) currView.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -56,8 +51,9 @@ public class TimelineFragment extends Fragment{
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
+        return currView;
     }
+
 
     private void loadTopPosts() {
         clear();

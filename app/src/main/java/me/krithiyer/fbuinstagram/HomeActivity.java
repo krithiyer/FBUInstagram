@@ -12,16 +12,10 @@ import android.view.MenuItem;
 
 public class HomeActivity extends AppCompatActivity {
 
-    // adapter variables
-   // RecyclerView rvPosts;
-   // TimelineAdapter adapter;
-   // ArrayList<Post> tlPosts;
-   // SwipeRefreshLayout swipeContainer;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
         // setting up Fragments
         final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -32,36 +26,6 @@ public class HomeActivity extends AppCompatActivity {
         // initially loading timeline
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.flFGLayout, fgTimeline).commit();
-
-
-        setContentView(R.layout.activity_home);
-//         initialize arraylist of posts
-//        tlPosts = new ArrayList<>();
-//         initialize adapter
-//        adapter = new TimelineAdapter(tlPosts);
-
-
-        // resolve recyclerview
-//        rvPosts = findViewById(R.id.rvPosts);
-//        rvPosts.setLayoutManager(new LinearLayoutManager(this));
-//        rvPosts.setAdapter(adapter);
-//
-//         loading timeline
-//        loadTopPosts();
-//
-        // setting refresh on pull down
-//        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                loadTopPosts();
-//            }
-//        });
-//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-//                android.R.color.holo_green_light,
-//                android.R.color.holo_orange_light,
-//                android.R.color.holo_red_light);
-
 
         // establishing bottom navigation
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -83,40 +47,10 @@ public class HomeActivity extends AppCompatActivity {
                         fragmentProf.replace(R.id.flFGLayout, fgProfile).commit();
 
 
-
                 }
                 return false;
             }
         });
 
     }
-
-
-//    private void loadTopPosts() {
-//        clear();
-//        final Post.Query postQuery = new Post.Query();
-//        postQuery.getTop().withUser();
-//
-//
-//        postQuery.findInBackground(new FindCallback<Post>() {
-//            @Override
-//            public void done(List<Post> objects, ParseException e) {
-//                if (e == null) {
-//                    for(int i = objects.size() - 1; i > -1; i--) {
-//                        tlPosts.add(objects.get(i));
-//                    }
-//                    adapter.notifyDataSetChanged();
-//                    swipeContainer.setRefreshing(false);
-//                } else {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-//
-//    public void clear() {
-//        tlPosts.clear();
-//        adapter.notifyDataSetChanged();
-    }
-
-//}
+}

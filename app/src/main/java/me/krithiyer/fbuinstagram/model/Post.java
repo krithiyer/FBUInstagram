@@ -36,10 +36,6 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-    //public Date getCreatedAt() {
-      //  return getDate(KEY_CREATED_AT);
-    //}
-
 
     public static class Query extends ParseQuery<Post>{
         public Query() {
