@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -21,20 +19,11 @@ import me.krithiyer.fbuinstagram.model.Post;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String imagePath = "/storage/self/primary/DCIM/Camera/IMG_20180709_154621.jpg";
-    private EditText descriptionInput;
-    private Button createButton;
-    private Button refreshButton;
-    private Button logOutButton;
-    private Button cameraButton;
-
     // adapter variables
     RecyclerView rvPosts;
     TimelineAdapter adapter;
     ArrayList<Post> tlPosts;
 
-    // Query variables
-    Post.Query newQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +79,6 @@ public class HomeActivity extends AppCompatActivity {
            // }
        // });
 
-        // refreshing the timeline
-       // refreshButton.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-           // public void onClick(View view) {
-             //   loadTopPosts();
-           // }
-       // });
-
     }
 
 
@@ -110,15 +91,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
-                    tlPosts.addAll(objects);
+                    for(int i = objects.size() - 1; i > -1; i--) {
+                        tlPosts.add(objects.get(i));
+                    }
                     adapter.notifyDataSetChanged();
-                    //for (int i = 0; i < objects.size(); i++) {
-
-                        //Log.d("HomeActivity", "Post[" + i + "] = "
-                          //      + objects.get(i).getDescription()
-                            //    + "\nusername = " + objects.get(i).getUser().getUsername()
-                       // );
-                 //   }
                 } else {
                     e.printStackTrace();
                 }
