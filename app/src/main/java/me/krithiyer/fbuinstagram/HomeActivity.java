@@ -1,6 +1,8 @@
 package me.krithiyer.fbuinstagram;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,12 +20,17 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements ProfileFragment.OnItemSelectedListener {
 
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    public final static int CREATE_IMAGE_ACTIVITY_REQUEST_CODE = 1035;
     public String photoFileName = "photo.jpg";
     File photoFile;
+
+    Fragment fgProfile;
+    Fragment fgTimeline;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +40,8 @@ public class HomeActivity extends AppCompatActivity {
         // setting up Fragments
         final FragmentManager fragmentManager = getSupportFragmentManager();
         // define your fragments here
-        final Fragment fgProfile = new ProfileFragment();
-        final Fragment fgTimeline = new TimelineFragment();
+        fgProfile= new ProfileFragment();
+        fgTimeline = new TimelineFragment();
 
         // initially loading timeline
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -48,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.create_button:
-                        onLaunchCamera();
+                        onLaunchCameraCP();
                         return true;
                     case R.id.home_buttom:
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -68,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(this, MainActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
     }
 
@@ -90,6 +97,26 @@ public class HomeActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             // Start the image capture intent to take photo
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        }
+    }
+
+    public void onLaunchCameraCP() {
+        // create Intent to take a picture and return control to the calling application
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Create a File reference to access to future access
+        photoFile = getPhotoFileUri(photoFileName);
+
+        // wrap File object into a content provider
+        // required for API >= 24
+        // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
+        Uri fileProvider = FileProvider.getUriForFile(getApplicationContext(), "com.codepath.fileprovider", photoFile);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+
+        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
+        // So as long as the result is not null, it's safe to use the intent.
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Start the image capture intent to take photo
+            startActivityForResult(intent, CREATE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
     }
 
@@ -116,12 +143,20 @@ public class HomeActivity extends AppCompatActivity {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // by this point we have the camera photo on disk
-                Intent i = new Intent(this, PostActivity.class);
-                i.putExtra("photoFilePath", photoFile.getAbsolutePath());
-                startActivity(i);
+//                Intent i = new Intent(this, PostActivity.class);
+//                i.putExtra("photoFilePath", photoFile.getAbsolutePath());
+//                startActivity(i);
+
+                Bitmap profBitmapImg =  BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                ((ProfileFragment) fgProfile).ibCreateProfPic.setImageBitmap(profBitmapImg);
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Intent i = new Intent(this, PostActivity.class);
+            i.putExtra("photoFilePath", photoFile.getAbsolutePath());
+            startActivity(i);
+
         }
     }
 

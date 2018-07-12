@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import me.krithiyer.fbuinstagram.model.Post;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
-    // list of movies
+    // list of Posts
     ArrayList<Post> timelinePosts;
     // context for rendering
     Context context;
 
     public TimelineAdapter(ArrayList<Post> post) {
+
         this.timelinePosts = post;
     }
 
@@ -45,6 +46,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         holder.tvTLCaption.setText(post.getUser().getUsername() + ": " + post.getDescription());
         holder.tvTLUsername.setText(post.getUser().getUsername());
         holder.tvCreatedAt.setText(post.getCreatedAt().toString());
+
+        //String profImage = post.getUser().getParseFile("profileImage").getUrl();
+
 
         String imgURL = post.getImage().getUrl();
         Glide.with(context)
