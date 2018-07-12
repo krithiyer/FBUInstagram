@@ -18,6 +18,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+
 import java.io.File;
 
 public class HomeActivity extends AppCompatActivity implements ProfileFragment.OnItemSelectedListener {
@@ -25,6 +28,7 @@ public class HomeActivity extends AppCompatActivity implements ProfileFragment.O
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public final static int CREATE_IMAGE_ACTIVITY_REQUEST_CODE = 1035;
+    public final static String PARSE_FILE_NAME = "profImage.jpg";
     public String photoFileName = "photo.jpg";
     File photoFile;
 
@@ -142,11 +146,8 @@ public class HomeActivity extends AppCompatActivity implements ProfileFragment.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // by this point we have the camera photo on disk
-//                Intent i = new Intent(this, PostActivity.class);
-//                i.putExtra("photoFilePath", photoFile.getAbsolutePath());
-//                startActivity(i);
-
+                ParseFile profPic = new ParseFile(photoFile.getAbsoluteFile());
+                ParseUser.getCurrentUser().put("profileImage", profPic);
                 Bitmap profBitmapImg =  BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 ((ProfileFragment) fgProfile).ibCreateProfPic.setImageBitmap(profBitmapImg);
             } else { // Result was a failure

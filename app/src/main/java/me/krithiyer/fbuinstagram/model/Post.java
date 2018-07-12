@@ -11,7 +11,6 @@ public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
-    private static final String KEY_PROFILE_PIC = "profileImage";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);

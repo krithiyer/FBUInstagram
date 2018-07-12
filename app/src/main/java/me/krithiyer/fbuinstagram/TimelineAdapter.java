@@ -47,7 +47,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         holder.tvTLUsername.setText(post.getUser().getUsername());
         holder.tvCreatedAt.setText(post.getCreatedAt().toString());
 
-        //String profImage = post.getUser().getParseFile("profileImage").getUrl();
+        String profImage = post.getUser().getParseFile("profileImage").getUrl();
+        Glide.with(context)
+                .load(profImage)
+                .into(holder.profilePicture);
 
 
         String imgURL = post.getImage().getUrl();
@@ -71,6 +74,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         ImageButton ibShare;
         ImageButton ibCommentPost;
         TextView tvCreatedAt;
+        ImageView profilePicture;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +86,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             ibFavorite = (ImageButton) itemView.findViewById(R.id.ibFav);
             ibShare = (ImageButton) itemView.findViewById(R.id.ibSend);
             ibCommentPost = (ImageButton) itemView.findViewById(R.id.ibComment);
+            profilePicture = (ImageView) itemView.findViewById(R.id.ivTLProfPic);
 
 
         }
