@@ -30,13 +30,11 @@
 
     <ImageView
         android:id="@+id/ibProfilePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="#ffffff"
-        android:tint="#cd486b"
-        app:srcCompat="@drawable/instagram_user_outline_24" />
+        android:background="#ffffff"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvProfileLayout"
