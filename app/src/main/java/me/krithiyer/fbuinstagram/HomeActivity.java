@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity implements ProfileFragment.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //getSupportActionBar().hide();
 
         // setting up Fragments
         final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -79,7 +80,7 @@ public class HomeActivity extends AppCompatActivity implements ProfileFragment.O
 
     public void logout() {
         Intent i = new Intent(this, MainActivity.class);
-//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
     }
 

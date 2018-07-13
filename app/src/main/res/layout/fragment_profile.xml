@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
 
     <Button
         android:id="@+id/btFGLogOut"
@@ -30,31 +31,57 @@
 
     <ImageView
         android:id="@+id/ibProfilePhoto"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="62dp"
+        android:layout_height="51dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
+        android:layout_marginEnd="-12dp"
+        android:layout_marginTop="7dp"
+        android:layout_toStartOf="@+id/btFGLogOut"
         android:background="#ffffff" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvProfileLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="228dp"
         android:layout_above="@+id/btAddProfilePhoto"
         android:layout_below="@+id/ibProfilePhoto"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="72dp"
+        android:background="#ffffff" />
 
     <TextView
         android:id="@+id/tvFGProfUser"
         android:layout_width="wrap_content"
-        android:layout_height="41dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/btFGLogOut"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="57dp"
         android:text="username"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ivNav"
+        android:layout_width="343dp"
+        android:layout_height="36dp"
+        android:layout_above="@+id/rvProfileLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-68dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/profbar" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="254dp"
+        android:layout_height="42dp"
+        android:layout_alignBottom="@+id/tvFGProfUser"
+        android:layout_alignEnd="@+id/ivNav"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/editprofile" />
 
 </RelativeLayout>

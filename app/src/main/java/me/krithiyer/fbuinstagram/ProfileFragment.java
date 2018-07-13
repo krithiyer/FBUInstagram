@@ -93,9 +93,8 @@ public class ProfileFragment extends Fragment {
         ibCreateProfPic = (ImageView) view.findViewById(R.id.ibProfilePhoto);
         ParseFile profPicTemp = getCurrentUser().getParseFile("profileImage");
                 if (profPicTemp != null) {
-                    profPicTemp.getUrl();
                     Glide.with(view.getContext())
-                            .load(profPicTemp)
+                            .load(profPicTemp.getUrl())
                             .into(ibCreateProfPic);
                 }
 

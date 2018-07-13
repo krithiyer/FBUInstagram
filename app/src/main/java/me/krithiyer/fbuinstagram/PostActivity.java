@@ -34,6 +34,7 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
         createButton = (Button) findViewById(R.id.btCreatePost);
         descriptionInput = (EditText) findViewById(R.id.tvCreateDescription);
 

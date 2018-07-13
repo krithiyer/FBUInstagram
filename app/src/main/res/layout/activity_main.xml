@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="173dp"
+        android:layout_marginTop="204dp"
         android:hint="Username" />""
         android:hint="Username" />
 
@@ -46,18 +46,13 @@
         android:text="LOG IN"
         android:textColor="#ffffff" />
 
-    <TextView
-        android:id="@+id/tvInstaSign"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp"
-        android:fontFamily="cursive"
-        android:text="Instagram"
-        android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/nav_logo_whiteout" />
 
 </RelativeLayout>
