@@ -148,6 +148,7 @@ public class HomeActivity extends AppCompatActivity implements ProfileFragment.O
             if (resultCode == RESULT_OK) {
                 ParseFile profPic = new ParseFile(photoFile.getAbsoluteFile());
                 ParseUser.getCurrentUser().put("profileImage", profPic);
+                ParseUser.getCurrentUser().saveInBackground();
                 Bitmap profBitmapImg =  BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 ((ProfileFragment) fgProfile).ibCreateProfPic.setImageBitmap(profBitmapImg);
             } else { // Result was a failure

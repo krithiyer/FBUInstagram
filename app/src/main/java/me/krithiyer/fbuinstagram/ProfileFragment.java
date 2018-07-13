@@ -11,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -50,6 +53,7 @@ public class ProfileFragment extends Fragment {
     Button logout;
     Button createProfPic;
     ImageView ibCreateProfPic;
+    TextView profFGUsername;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -87,6 +91,16 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // adding profile picture
         ibCreateProfPic = (ImageView) view.findViewById(R.id.ibProfilePhoto);
+        ParseFile profPicTemp = getCurrentUser().getParseFile("profileImage");
+                if (profPicTemp != null) {
+                    profPicTemp.getUrl();
+                    Glide.with(view.getContext())
+                            .load(profPicTemp)
+                            .into(ibCreateProfPic);
+                }
+
+        profFGUsername = (TextView) view.findViewById(R.id.tvFGProfUser);
+        profFGUsername.setText(ParseUser.getCurrentUser().getUsername());
         createProfPic = (Button) view.findViewById(R.id.btAddProfilePhoto);
         createProfPic.setOnClickListener(new View.OnClickListener() {
             @Override
