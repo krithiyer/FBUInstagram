@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,11 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import me.krithiyer.fbuinstagram.model.Post;
 
@@ -38,51 +41,35 @@ public class ProfileFragment extends Fragment {
 
     // Layout variables
     RecyclerView rvProfilePosts;
-    //ProfileAdapter userAdapter;
+    ProfileAdapter userAdapter;
     // initialize arraylist of posts
     ArrayList<Post> profPosts;
     SwipeRefreshLayout swipeContainerProf;
     // TextView tvCaption;
 
-    // Taking profile photo variables
-    public final String APP_TAG = "MyCustomApp";
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
-    File photoFile;
-
     Button logout;
     Button createProfPic;
     ImageView ibCreateProfPic;
     TextView profFGUsername;
+    ImageView userPic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_profile, parent, false);
-//        profPosts = new ArrayList<>();
-//        userAdapter = new ProfileAdapter(profPosts);
-//        // loading recyclerview
-//        rvProfilePosts = userView.findViewById(R.id.rvProfileLayout);
-//        rvProfilePosts.setLayoutManager(new LinearLayoutManager(userView.getContext()));
-//        rvProfilePosts.setAdapter(userAdapter);
-//         tvCaption = currView.findViewById(R.id.tvTLCaption);
-//
-//        // loading posts
-//        //loadTopPosts();
-//
-//        // setting refresh on pull down
-//        swipeContainerProf = (SwipeRefreshLayout) userView.findViewById(R.id.swipeContainer);
-//        swipeContainerProf.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                //loadTopPosts();
-//            }
-//        });
-//        swipeContainerProf.setColorSchemeResources(android.R.color.holo_blue_bright,
-//                android.R.color.holo_green_light,
-//                android.R.color.holo_orange_light,
-//                android.R.color.holo_red_light);
-//        return userView;
+        View userView =  inflater.inflate(R.layout.fragment_profile, parent, false);
+        profPosts = new ArrayList<>();
+        userAdapter = new ProfileAdapter(profPosts);
+        // loading recyclerview
+        rvProfilePosts = userView.findViewById(R.id.rvProfileLayout);
+        GridLayoutManager profUserView = new GridLayoutManager(userView.getContext(),3);
+        rvProfilePosts.setLayoutManager(profUserView);
+        rvProfilePosts.setAdapter(userAdapter);
+
+        // loading posts
+        loadUserPosts(ParseUser.getCurrentUser());
+
+        // setting refresh on pull down
+        return userView;
 
 
     }
@@ -97,7 +84,6 @@ public class ProfileFragment extends Fragment {
                             .load(profPicTemp.getUrl())
                             .into(ibCreateProfPic);
                 }
-
         profFGUsername = (TextView) view.findViewById(R.id.tvFGProfUser);
         profFGUsername.setText(ParseUser.getCurrentUser().getUsername());
         createProfPic = (Button) view.findViewById(R.id.btAddProfilePhoto);
@@ -133,5 +119,24 @@ public class ProfileFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " must implement MyListFragment.OnItemSelectedListener");
         }
+    }
+
+    private void loadUserPosts(ParseUser currentUser) {
+        final Post.Query quey = new Post.Query();
+        quey.whereEqualTo("user", currentUser);
+
+        quey.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> objects, ParseException e) {
+                if (e == null) {
+                    for(int i = objects.size() - 1; i > -1; i--) {
+                        profPosts.add(objects.get(i));
+                    }
+                    userAdapter.notifyDataSetChanged();
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
