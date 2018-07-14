@@ -40,7 +40,6 @@ public class HomeActivity extends AppCompatActivity implements ProfileFragment.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        //getSupportActionBar().hide();
 
         // setting up Fragments
         final FragmentManager fragmentManager = getSupportFragmentManager();

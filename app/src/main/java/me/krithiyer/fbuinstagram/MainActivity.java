@@ -1,6 +1,7 @@
 package me.krithiyer.fbuinstagram;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private Button loginBtn;
     private Button signUpBtn;
 
+    AnimationDrawable animationDrawable;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -34,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        animationDrawable =(AnimationDrawable) findViewById(R.id.relativeLayout).getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+
 
         usernameInput = findViewById(R.id.tvUsername);
         passwordInput = findViewById(R.id.tvPassword);

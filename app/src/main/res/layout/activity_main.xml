@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/animation_list"
     tools:context=".MainActivity">
 
 
@@ -15,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="204dp"
         android:hint="Username" />""
-        android:hint="Username" />
+    android:hint="Username" />
 
     <EditText
         android:id="@+id/tvPassword"
