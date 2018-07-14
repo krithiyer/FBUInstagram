@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +40,14 @@ public class TimelineFragment extends Fragment{
        // tvCaption = currView.findViewById(R.id.tvTLCaption);
 
         // loading posts
-        loadTopPosts();
+        loadTopPosts(ParseUser.getCurrentUser());
 
         // setting refresh on pull down
         swipeContainer = (SwipeRefreshLayout) currView.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadTopPosts();
+                loadTopPosts(ParseUser.getCurrentUser());
             }
         });
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -57,10 +58,10 @@ public class TimelineFragment extends Fragment{
     }
 
 
-    private void loadTopPosts() {
+    private void loadTopPosts(ParseUser currtUser) {
         clear();
         final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
+        postQuery.getTop().withUser().whereEqualTo("user",currtUser);
 
 
         postQuery.findInBackground(new FindCallback<Post>() {
